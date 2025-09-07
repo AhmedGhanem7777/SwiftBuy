@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SwiftBuy.Core.Domain.Contracts;
 using SwiftBuy.Infrastructure.Persistence._Data;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace SwiftBuy.Infrastructure.Persistence
             {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddScoped(typeof(ISwiftBuyContextInitializer), typeof(SwiftBuyContextInitializer));
             return services;
         }
     }

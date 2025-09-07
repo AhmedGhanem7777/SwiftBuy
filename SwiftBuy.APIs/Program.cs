@@ -1,5 +1,8 @@
 
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SwiftBuy.APIs.Extensions;
+using SwiftBuy.Core.Domain.Contracts;
 using SwiftBuy.Infrastructure.Persistence;
 using SwiftBuy.Infrastructure.Persistence._Data;
 
@@ -7,7 +10,7 @@ namespace SwiftBuy.APIs
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +23,10 @@ namespace SwiftBuy.APIs
             #endregion
 
             var app = builder.Build();
+
+            #region Apply all pending migrations [Update-Database] and Data Seeding
+            await app.InitializeSwiftBuyContextAsync();
+            #endregion
 
             #region Configure the HTTP request pipeline
             if (app.Environment.IsDevelopment())
