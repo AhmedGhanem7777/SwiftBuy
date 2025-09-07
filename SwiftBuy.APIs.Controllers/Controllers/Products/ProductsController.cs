@@ -25,5 +25,12 @@ namespace SwiftBuy.APIs.Controllers.Controllers.Products
             var products = await _serviceManager.ProductService.GetPrductsAsync();
             return Ok(products);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
+        {
+            var product = await _serviceManager.ProductService.GetPrductByIdAsync(id);
+            return Ok(product);
+        }
     }
 }

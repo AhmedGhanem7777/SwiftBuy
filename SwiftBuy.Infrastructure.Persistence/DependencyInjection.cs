@@ -20,7 +20,7 @@ namespace SwiftBuy.Infrastructure.Persistence
         {
             services.AddDbContext<SwiftBuyContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                options.UseLazyLoadingProxies().UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddScoped(typeof(ISwiftBuyContextInitializer), typeof(SwiftBuyContextInitializer));
