@@ -23,7 +23,7 @@ namespace SwiftBuy.Infrastructure.Persistence._Data.Configs.Products
 
             builder.Property(p => p.Description)
                 .IsRequired()
-                .HasMaxLength(180);
+                .HasMaxLength(400);
 
             builder.Property(p => p.Price)
                 .HasColumnType("decimal(9,2)");

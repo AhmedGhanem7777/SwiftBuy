@@ -8,13 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.8">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SwiftBuy.APIs.Controllers\SwiftBuy.APIs.Controllers.csproj" />
+    <ProjectReference Include="..\SwiftBuy.Core.Application\SwiftBuy.Core.Application.csproj" />
     <ProjectReference Include="..\SwiftBuy.Infrastructure.Persistence\SwiftBuy.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 
