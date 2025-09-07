@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SwiftBuy.APIs.Extensions;
@@ -9,7 +8,6 @@ using SwiftBuy.Core.Domain.Contracts;
 using SwiftBuy.Infrastructure.Persistence;
 using SwiftBuy.Infrastructure.Persistence._Data;
 using SwiftBuy.APIs.Controllers;
-
 namespace SwiftBuy.APIs
 {
     public class Program
@@ -22,8 +20,12 @@ namespace SwiftBuy.APIs
             builder.Services.AddControllers()
                 .AddApplicationPart(typeof(AssemblyInformation).Assembly);
 
-            //// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
             builder.Services.AddPersistenceServices(builder.Configuration);
 
@@ -39,10 +41,12 @@ namespace SwiftBuy.APIs
             await app.InitializeSwiftBuyContextAsync();
             #endregion
 
+
             #region Configure the HTTP request pipeline
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI();
             }
 
             app.UseHttpsRedirection();
