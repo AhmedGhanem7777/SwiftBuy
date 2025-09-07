@@ -45,8 +45,8 @@ namespace SwiftBuy.Infrastructure.Persistence._Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(180)
-                        .HasColumnType("nvarchar(180)");
+                        .HasMaxLength(400)
+                        .HasColumnType("nvarchar(400)");
 
                     b.Property<string>("LastModifiedBy")
                         .IsRequired()

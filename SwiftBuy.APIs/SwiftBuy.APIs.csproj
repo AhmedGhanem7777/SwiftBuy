@@ -1,20 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.8">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SwiftBuy.APIs.Controllers\SwiftBuy.APIs.Controllers.csproj" />
+    <ProjectReference Include="..\SwiftBuy.Core.Application.Abstraction\SwiftBuy.Core.Application.Abstraction.csproj" />
+    <ProjectReference Include="..\SwiftBuy.Core.Application\SwiftBuy.Core.Application.csproj" />
     <ProjectReference Include="..\SwiftBuy.Infrastructure.Persistence\SwiftBuy.Infrastructure.Persistence.csproj" />
   </ItemGroup>
 
