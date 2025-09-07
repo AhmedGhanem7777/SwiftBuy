@@ -25,7 +25,7 @@ namespace SwiftBuy.Infrastructure.Persistence.UnitOfWork
             where TEntity : BaseEntity<TKey>
             where TKey : IEquatable<TKey>
         {
-            return (IGenericRepository<TEntity, TKey>) _repositories.GetOrAdd(typeof(TEntity).Name, () => new GenericRepository<TEntity, TKey>(_dbContext));
+            return (IGenericRepository<TEntity, TKey>) _repositories.GetOrAdd(typeof(TEntity).Name, new GenericRepository<TEntity, TKey>(_dbContext));
         }
 
         public async Task<int> CompleteAsync()
