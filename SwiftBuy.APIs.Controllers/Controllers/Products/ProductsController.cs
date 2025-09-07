@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SwiftBuy.APIs.Controllers.Controllers.Products
 {
-    internal class ProductsController : BaseApiController
+    public class ProductsController : BaseApiController
     {
         private readonly IServiceManager _serviceManager;
 

@@ -9,7 +9,7 @@ namespace SwiftBuy.APIs.Controllers.Controllers.Base
 {
     [Route("api/[controller]")]
     [ApiController]
-    internal class BaseApiController : ControllerBase
+    public class BaseApiController : ControllerBase
     {
     }
 }
