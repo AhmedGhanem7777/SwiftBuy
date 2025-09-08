@@ -1,4 +1,5 @@
-﻿using SwiftBuy.Core.Application.Abstraction.Models;
+﻿using SwiftBuy.Core.Application.Abstraction.Common;
+using SwiftBuy.Core.Application.Abstraction.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace SwiftBuy.Core.Application.Abstraction.Services
 {
     public interface IProductService
     {
-        Task<IEnumerable<ProductToReturnDto>> GetPrductsAsync();
+        Task<Pagination<ProductToReturnDto>> GetPrductsAsync(ProductSpecParams specParams);
         Task<ProductToReturnDto> GetPrductByIdAsync(int id);
 
         Task<IEnumerable<BrandDto>> GetBrandsAsync();
