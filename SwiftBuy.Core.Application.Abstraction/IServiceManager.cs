@@ -1,4 +1,5 @@
-﻿using SwiftBuy.Core.Application.Abstraction.Services;
+﻿using SwiftBuy.Core.Application.Abstraction.Services.Basket;
+using SwiftBuy.Core.Application.Abstraction.Services.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,6 @@ namespace SwiftBuy.Core.Application.Abstraction
     public interface IServiceManager
     {
         public IProductService ProductService { get;}
+        public IBasketService BasketService { get;}
     }
 }
