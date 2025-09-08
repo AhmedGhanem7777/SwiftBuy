@@ -15,10 +15,15 @@ namespace SwiftBuy.Core.Application.Mapping
         {
             CreateMap<Product, ProductToReturnDto>()
                 .ForMember(d => d.Category, o => o.MapFrom(s => s.Category!.Name))
-                .ForMember(d => d.Brand, o => o.MapFrom(s => s.Brand!.Name));
+                .ForMember(d => d.Brand, o => o.MapFrom(s => s.Brand!.Name))
+                .ForMember(d => d.PictureUrl, o => o.MapFrom<ProductPictureUrlResolver>());
 
-            CreateMap<ProductBrand, BrandDto>();
-            CreateMap<ProductCategory, CategoryDto>();
+            CreateMap<ProductBrand, BrandDto>()
+                .ForMember(d => d.PictureUrl, o => o.MapFrom<BrandPictureUrlResolver>());
+
+            CreateMap<ProductCategory, CategoryDto>()
+                .ForMember(d => d.PictureUrl, o => o.MapFrom<CategoryPictureUrlResolver>());
+
         }
     }
 }
