@@ -53,6 +53,7 @@ namespace SwiftBuy.APIs
 
             app.UseAuthorization();
 
+            app.UseStaticFiles();
 
             app.MapControllers();
             #endregion
