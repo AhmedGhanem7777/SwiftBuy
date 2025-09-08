@@ -6,6 +6,7 @@ using SwiftBuy.Core.Application.Abstraction;
 using SwiftBuy.Core.Application;
 using SwiftBuy.Core.Domain.Contracts;
 using SwiftBuy.Infrastructure.Persistence;
+using SwiftBuy.Infrastructure;
 using SwiftBuy.Infrastructure.Persistence._Data;
 using SwiftBuy.APIs.Controllers;
 namespace SwiftBuy.APIs
@@ -33,6 +34,7 @@ namespace SwiftBuy.APIs
             builder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();
 
             builder.Services.AddApplicationServices();
+            builder.Services.AddInfrastructureServices(builder.Configuration);
             #endregion
 
             var app = builder.Build();
