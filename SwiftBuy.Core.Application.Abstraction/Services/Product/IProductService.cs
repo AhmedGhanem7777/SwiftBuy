@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SwiftBuy.Core.Application.Abstraction.Services
+namespace SwiftBuy.Core.Application.Abstraction.Services.Product
 {
     public interface IProductService
     {
