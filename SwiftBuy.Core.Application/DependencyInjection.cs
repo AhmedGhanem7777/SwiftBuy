@@ -22,9 +22,7 @@ namespace SwiftBuy.Core.Application
             services.AddScoped<IServiceManager, ServiceManager>();
             services.AddScoped(typeof(Func<IBasketService>), (seviceProvider) =>
             {
-                var mapper = seviceProvider.GetRequiredService<IMapper>();
-                var basketRepository = seviceProvider.GetRequiredService<IBasketRepository>();
-                return () => new BasketService(basketRepository, mapper);
+                return () => seviceProvider.GetRequiredService<IBasketService>();
             });
 
             return services;
