@@ -44,7 +44,7 @@ namespace SwiftBuy.APIs
             #endregion
 
 
-            #region Configure the HTTP request pipeline
+            #region Configure Kestrel Middleware
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
