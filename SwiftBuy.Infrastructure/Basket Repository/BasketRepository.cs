@@ -18,16 +18,16 @@ namespace SwiftBuy.Infrastructure.Basket_Repository
         {
             _database = redis.GetDatabase();
         }
-        async Task<CustomerBasket?> IBasketRepository.GetBasketAsync(string basketId)
+        public async Task<CustomerBasket?> GetBasketAsync(string basketId)
         {
             var basket = await _database.StringGetAsync(basketId);
-            return basket.IsNullOrEmpty ? null : JsonSerializer.Deserialize<CustomerBasket>(basket!);
+           return basket.IsNullOrEmpty ? null : JsonSerializer.Deserialize<CustomerBasket>(basket!);
         }
 
-        async Task<CustomerBasket?> IBasketRepository.UpdateBasketAsync(CustomerBasket basket)
+        public async Task<CustomerBasket?> UpdateBasketAsync(CustomerBasket basket)
         {
             var createdOrUpdated = await _database.StringSetAsync(basket.Id, JsonSerializer.Serialize(basket), TimeSpan.FromDays(20));
-            return createdOrUpdated ? basket : null;
+           return createdOrUpdated ? await GetBasketAsync(basket.Id) : null;
         }
 
         public async Task<bool> DeleteBasketAsync(string basketId)
