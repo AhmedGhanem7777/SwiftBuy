@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SwiftBuy.APIs.Controllers.Controllers.Base;
+using SwiftBuy.APIs.Controllers.Errors;
 using SwiftBuy.Core.Application.Abstraction;
 using SwiftBuy.Core.Application.Abstraction.Common;
 using SwiftBuy.Core.Application.Abstraction.Models;
@@ -31,8 +33,8 @@ namespace SwiftBuy.APIs.Controllers.Controllers.Products
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             var product = await _serviceManager.ProductService.GetPrductByIdAsync(id);
-            if (product is null)
-                return NotFound(new {StatusCode = 404, Message = "Not Found"});
+            // if (product is null)
+            //     return NotFound(new {StatusCode = 404, Message = "Not Found"});
             return Ok(product);
         }
 

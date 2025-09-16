@@ -2,6 +2,7 @@
 using SwiftBuy.Core.Application.Abstraction.Common;
 using SwiftBuy.Core.Application.Abstraction.Models;
 using SwiftBuy.Core.Application.Abstraction.Services.Product;
+using SwiftBuy.Core.Application.Exceptions;
 using SwiftBuy.Core.Domain.Common.Entities;
 using SwiftBuy.Core.Domain.Contracts;
 using SwiftBuy.Core.Domain.Entities.Product;
@@ -39,6 +40,10 @@ namespace SwiftBuy.Core.Application.Services
         {
             var spec = new ProductWithBrandAndCategorySpecifications(id);
             var product = await _unitOfWork.GetRepository<Product, int>().GetByIdWithSpecAsync(spec);
+
+            if (product is null)
+                throw new NotFoundException(typeof(Product).Name, id);
+
             return _mapper.Map<ProductToReturnDto>(product);
         }
 
