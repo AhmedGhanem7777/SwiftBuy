@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SwiftBuy.Core.Domain.Common.Entities;
-using SwiftBuy.Core.Domain.Contracts;
+using SwiftBuy.Core.Domain.Contracts.Persistence;
 using SwiftBuy.Core.Domain.Entities.Product;
+using SwiftBuy.Infrastructure.Persistence._Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +12,17 @@ using System.Threading.Tasks;
 
 namespace SwiftBuy.Infrastructure.Persistence._Data
 {
-    internal class SwiftBuyContextInitializer : ISwiftBuyContextInitializer
+    public class SwiftBuyContextInitializer : DbInitializer, ISwiftBuyContextInitializer
     {
         private readonly SwiftBuyContext _dbContext;
 
         public SwiftBuyContextInitializer(SwiftBuyContext dbContext)
+            :base(dbContext)
         {
             _dbContext = dbContext;
         }
-        public async Task InitializeAsync()
-        {
-            var pendingMigrations = await _dbContext.Database.GetPendingMigrationsAsync();
-            if (pendingMigrations.Any())
-                await _dbContext.Database.MigrateAsync();
-        }
 
-        public async Task SeedAsync()
+        public override async Task SeedAsync()
         {
             if (_dbContext.Brands.Count() == 0)
             {

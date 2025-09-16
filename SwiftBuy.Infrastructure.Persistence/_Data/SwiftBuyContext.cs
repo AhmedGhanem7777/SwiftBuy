@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SwiftBuy.Core.Domain.Common.Entities;
 using SwiftBuy.Core.Domain.Entities.Product;
+using SwiftBuy.Infrastructure.Persistence._Common;
+using SwiftBuy.Infrastructure.Persistence._Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +21,7 @@ namespace SwiftBuy.Infrastructure.Persistence._Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly(), type => type.GetCustomAttribute<DbContextTypeAttribute>()?.DbContextType == typeof(SwiftBuyContext));
         }
 
         public DbSet<Product> Products { get; set; }

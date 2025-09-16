@@ -7,11 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.20" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\SwiftBuy.Core.Shared\SwiftBuy.Core.Shared.csproj" />
+    <Folder Include="Attributes\" />
   </ItemGroup>
 
 </Project>
