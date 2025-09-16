@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using SwiftBuy.Core.Application.Abstraction.Common;
 using SwiftBuy.Core.Application.Abstraction.Models;
-using SwiftBuy.Core.Application.Abstraction.Services;
+using SwiftBuy.Core.Application.Abstraction.Services.Product;
 using SwiftBuy.Core.Domain.Common.Entities;
 using SwiftBuy.Core.Domain.Contracts;
+using SwiftBuy.Core.Domain.Entities.Product;
 using SwiftBuy.Core.Domain.Specifications.Products;
 using System;
 using System.Collections.Generic;

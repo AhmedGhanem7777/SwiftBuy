@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace SwiftBuy.Infrastructure.Persistence._Data.Configs.Base
 {
-    internal class BaseAuditableEntityConfigurations<TEntity, TKey> : IEntityTypeConfiguration<TEntity>
+    internal class BaseAuditableEntityConfigurations<TEntity, TKey> : BaseEntityConfigurations<TEntity, TKey>
         where TEntity : BaseAuditableEntity<TKey>
         where TKey : IEquatable<TKey>
     {
-        public virtual void Configure(EntityTypeBuilder<TEntity> builder)
+        public override void Configure(EntityTypeBuilder<TEntity> builder)
         {
-            builder.Property(E => E.Id)
-                .ValueGeneratedOnAdd();
+            base.Configure(builder);
+
             builder.Property(E => E.CreatedBy)
                 .IsRequired();
             builder.Property(E => E.CreatedOn)

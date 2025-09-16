@@ -1,4 +1,5 @@
 ﻿using SwiftBuy.Core.Domain.Common;
+using SwiftBuy.Core.Domain.Entities.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;

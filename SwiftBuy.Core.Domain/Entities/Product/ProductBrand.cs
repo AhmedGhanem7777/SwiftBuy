@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SwiftBuy.Core.Domain.Common.Entities
+namespace SwiftBuy.Core.Domain.Entities.Product
 {
-    public class ProductCategory : BaseAuditableEntity<int>
+    public class ProductBrand : BaseAuditableEntity<int>
     {
         public required string Name { get; set; }
         public string? PictureUrl { get; set; }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SwiftBuy.Core.Domain.Common.Entities;
 using SwiftBuy.Core.Domain.Contracts;
+using SwiftBuy.Core.Domain.Entities.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;

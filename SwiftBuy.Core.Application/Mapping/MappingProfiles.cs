@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using SwiftBuy.Core.Application.Abstraction.Models;
 using SwiftBuy.Core.Domain.Common.Entities;
+using SwiftBuy.Core.Domain.Entities.Basket;
+using SwiftBuy.Core.Domain.Entities.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,8 @@ namespace SwiftBuy.Core.Application.Mapping
             CreateMap<ProductCategory, CategoryDto>()
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<CategoryPictureUrlResolver>());
 
+            CreateMap<BasketItemDto, BasketItem>().ReverseMap();
+            CreateMap<CustomerBasketDto, CustomerBasket>().ReverseMap();
         }
     }
 }

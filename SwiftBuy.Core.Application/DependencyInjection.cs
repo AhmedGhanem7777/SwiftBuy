@@ -1,7 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 using SwiftBuy.Core.Application.Abstraction;
+using SwiftBuy.Core.Application.Abstraction.Services.Basket;
 using SwiftBuy.Core.Application.Mapping;
 using SwiftBuy.Core.Application.Services;
+using SwiftBuy.Core.Domain.Contracts.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +20,10 @@ namespace SwiftBuy.Core.Application
             services.AddAutoMapper(typeof(MappingProfiles));
 
             services.AddScoped<IServiceManager, ServiceManager>();
+            services.AddScoped(typeof(Func<IBasketService>), (seviceProvider) =>
+            {
+                return () => seviceProvider.GetRequiredService<IBasketService>();
+            });
 
             return services;
         }

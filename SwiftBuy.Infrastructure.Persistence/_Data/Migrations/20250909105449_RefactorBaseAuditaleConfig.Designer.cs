@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwiftBuy.Infrastructure.Persistence._Data;
 
@@ -11,9 +12,11 @@ using SwiftBuy.Infrastructure.Persistence._Data;
 namespace SwiftBuy.Infrastructure.Persistence._Data.Migrations
 {
     [DbContext(typeof(SwiftBuyContext))]
-    partial class SwiftBuyContextModelSnapshot : ModelSnapshot
+    [Migration("20250909105449_RefactorBaseAuditaleConfig")]
+    partial class RefactorBaseAuditaleConfig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
