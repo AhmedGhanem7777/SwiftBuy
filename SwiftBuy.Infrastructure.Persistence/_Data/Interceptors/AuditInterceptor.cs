@@ -37,8 +37,9 @@ namespace SwiftBuy.Infrastructure.Persistence._Data.Interceptors
             if (dbContext is null)
                 return;
 
-            foreach (var entry in dbContext.ChangeTracker.Entries<BaseAuditableEntity<int>>()
-                .Where(entry => entry.State is EntityState.Added or EntityState.Modified))
+            var entries = dbContext.ChangeTracker.Entries<IBaseAuditableEntity>()
+                                                 .Where(entity => entity.State is EntityState.Added or EntityState.Modified);
+            foreach (var entry in entries)
             {
                 if (entry.State is EntityState.Added)
                 {

@@ -20,10 +20,15 @@ namespace SwiftBuy.Infrastructure.Persistence
     {
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<SwiftBuyContext>(options =>
+            services.AddDbContext<SwiftBuyContext>((serviceProvider, options) =>
             {
-                options.UseLazyLoadingProxies().UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                options
+                .UseLazyLoadingProxies()
+                .UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+                .AddInterceptors(serviceProvider.GetRequiredService<AuditInterceptor>());
             });
+            services.AddScoped(typeof(AuditInterceptor));
+
             services.AddDbContext<SwiftBuyIdentityContext>(options =>
             {
                 options.UseLazyLoadingProxies().UseSqlServer(configuration.GetConnectionString("IdentityContext"));
