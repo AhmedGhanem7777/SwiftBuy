@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SwiftBuy.Infrastructure.Persistence._Data;
 
@@ -11,9 +12,11 @@ using SwiftBuy.Infrastructure.Persistence._Data;
 namespace SwiftBuy.Infrastructure.Persistence._Data.Migrations
 {
     [DbContext(typeof(SwiftBuyContext))]
-    partial class SwiftBuyContextModelSnapshot : ModelSnapshot
+    [Migration("20250918113645_OrderModule")]
+    partial class OrderModule
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,7 +78,7 @@ namespace SwiftBuy.Infrastructure.Persistence._Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("SwiftBuy.Core.Domain.Entities.Order.DeliveryMethod", b =>
@@ -103,7 +106,7 @@ namespace SwiftBuy.Infrastructure.Persistence._Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DeliveryMethods", (string)null);
+                    b.ToTable("DeliveryMethods");
                 });
 
             modelBuilder.Entity("SwiftBuy.Core.Domain.Entities.Order.Order", b =>
@@ -153,7 +156,7 @@ namespace SwiftBuy.Infrastructure.Persistence._Data.Migrations
 
                     b.HasIndex("DeliveryMethodId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("SwiftBuy.Core.Domain.Entities.Order.OrderItem", b =>
@@ -191,7 +194,7 @@ namespace SwiftBuy.Infrastructure.Persistence._Data.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems", (string)null);
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("SwiftBuy.Core.Domain.Entities.Product.ProductBrand", b =>
@@ -225,7 +228,7 @@ namespace SwiftBuy.Infrastructure.Persistence._Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands", (string)null);
+                    b.ToTable("Brands");
                 });
 
             modelBuilder.Entity("SwiftBuy.Core.Domain.Entities.Product.ProductCategory", b =>
@@ -259,7 +262,7 @@ namespace SwiftBuy.Infrastructure.Persistence._Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("SwiftBuy.Core.Domain.Common.Entities.Product", b =>
@@ -313,7 +316,7 @@ namespace SwiftBuy.Infrastructure.Persistence._Data.Migrations
 
                             b1.HasKey("OrderId");
 
-                            b1.ToTable("Orders", (string)null);
+                            b1.ToTable("Orders");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");
@@ -350,7 +353,7 @@ namespace SwiftBuy.Infrastructure.Persistence._Data.Migrations
 
                             b1.HasKey("OrderItemId");
 
-                            b1.ToTable("OrderItems", (string)null);
+                            b1.ToTable("OrderItems");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderItemId");
