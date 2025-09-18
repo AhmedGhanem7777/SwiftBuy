@@ -1,4 +1,5 @@
 ﻿using SwiftBuy.Core.Application.Abstraction.Services.Basket;
+using SwiftBuy.Core.Application.Abstraction.Services.Order;
 using SwiftBuy.Core.Application.Abstraction.Services.Product;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,6 @@ namespace SwiftBuy.Core.Application.Abstraction
     {
         public IProductService ProductService { get;}
         public IBasketService BasketService { get;}
+        public IOrderService OrderService { get;}
     }
 }

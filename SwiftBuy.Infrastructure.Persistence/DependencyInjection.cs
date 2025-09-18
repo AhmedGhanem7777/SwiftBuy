@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SwiftBuy.Core.Domain.Contracts;
+using SwiftBuy.Core.Domain.Contracts.Persistence;
 using SwiftBuy.Infrastructure.Persistence._Data;
 using SwiftBuy.Infrastructure.Persistence._Data.Interceptors;
+using SwiftBuy.Infrastructure.Persistence._Identity;
 using SwiftBuy.Infrastructure.Persistence.UnitOfWork;
 using System;
 using System.Collections.Generic;
@@ -18,12 +20,22 @@ namespace SwiftBuy.Infrastructure.Persistence
     {
         public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<SwiftBuyContext>(options =>
+            services.AddDbContext<SwiftBuyContext>((serviceProvider, options) =>
             {
-                options.UseLazyLoadingProxies().UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                options
+                .UseLazyLoadingProxies()
+                .UseSqlServer(configuration.GetConnectionString("DefaultConnection"))
+                .AddInterceptors(serviceProvider.GetRequiredService<AuditInterceptor>());
+            });
+            services.AddScoped(typeof(AuditInterceptor));
+
+            services.AddDbContext<SwiftBuyIdentityContext>(options =>
+            {
+                options.UseLazyLoadingProxies().UseSqlServer(configuration.GetConnectionString("IdentityContext"));
             });
 
             services.AddScoped(typeof(ISwiftBuyContextInitializer), typeof(SwiftBuyContextInitializer));
+            services.AddScoped(typeof(ISwiftBuyIdentityContextInitializer), typeof(SwiftBuyIdentityContextInitializer));
 
             services.AddScoped(typeof(ISaveChangesInterceptor), typeof(AuditInterceptor));
 

@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SwiftBuy.Core.Domain.Common.Entities;
-using SwiftBuy.Core.Domain.Contracts;
+using SwiftBuy.Core.Domain.Contracts.Persistence;
+using SwiftBuy.Core.Domain.Entities.Order;
 using SwiftBuy.Core.Domain.Entities.Product;
+using SwiftBuy.Infrastructure.Persistence._Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +13,17 @@ using System.Threading.Tasks;
 
 namespace SwiftBuy.Infrastructure.Persistence._Data
 {
-    internal class SwiftBuyContextInitializer : ISwiftBuyContextInitializer
+    public class SwiftBuyContextInitializer : DbInitializer, ISwiftBuyContextInitializer
     {
         private readonly SwiftBuyContext _dbContext;
 
         public SwiftBuyContextInitializer(SwiftBuyContext dbContext)
+            :base(dbContext)
         {
             _dbContext = dbContext;
         }
-        public async Task InitializeAsync()
-        {
-            var pendingMigrations = await _dbContext.Database.GetPendingMigrationsAsync();
-            if (pendingMigrations.Any())
-                await _dbContext.Database.MigrateAsync();
-        }
 
-        public async Task SeedAsync()
+        public override async Task SeedAsync()
         {
             if (_dbContext.Brands.Count() == 0)
             {
@@ -65,6 +62,20 @@ namespace SwiftBuy.Infrastructure.Persistence._Data
                     foreach (var product in products)
                     {
                         _dbContext.Set<Product>().Add(product);
+                    }
+                    await _dbContext.SaveChangesAsync();
+                }
+            }
+            
+            if (_dbContext.DeliveryMethods.Count() == 0)
+            {
+                var deliveryMethodsData = File.ReadAllText("../SwiftBuy.Infrastructure.Persistence/_Data/Seeds/delivery.json");
+                var deliveryMethods = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliveryMethodsData);
+                if (deliveryMethods is not null && deliveryMethods.Count() > 0)
+                {
+                    foreach (var deliveryMethod in deliveryMethods)
+                    {
+                        _dbContext.Set<DeliveryMethod>().Add(deliveryMethod);
                     }
                     await _dbContext.SaveChangesAsync();
                 }
