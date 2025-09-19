@@ -3,13 +3,15 @@ using SwiftBuy.Core.Application.Abstraction.Models;
 using SwiftBuy.Core.Application.Abstraction.Models.Order;
 using SwiftBuy.Core.Domain.Common.Entities;
 using SwiftBuy.Core.Domain.Entities.Basket;
-using SwiftBuy.Core.Domain.Entities.Order;
+using UserAddress = SwiftBuy.Core.Domain.Entities.Identity.Address;
+using OrderAddress = SwiftBuy.Core.Domain.Entities.Order.Address;
 using SwiftBuy.Core.Domain.Entities.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SwiftBuy.Core.Domain.Entities.Order;
 
 namespace SwiftBuy.Core.Application.Mapping
 {
@@ -39,8 +41,10 @@ namespace SwiftBuy.Core.Application.Mapping
                 .ForMember(d => d.ProductName, o => o.MapFrom(s => s.Product.ProductName))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom<OrderItemPictureUrlResolver>());
 
-            CreateMap<Address, AddressDto>().ReverseMap();
+            CreateMap<OrderAddress, AddressDto>().ReverseMap();
             CreateMap<DeliveryMethod, DeliveryMethodDto>();
+
+            CreateMap<UserAddress, AddressDto>().ReverseMap();
 
         }
     }

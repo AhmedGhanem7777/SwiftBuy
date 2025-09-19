@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SwiftBuy.Core.Application.Abstraction.Models.Auth;
+using SwiftBuy.Core.Application.Abstraction.Models.Order;
 using SwiftBuy.Core.Application.Abstraction.Services.Auth;
 using SwiftBuy.Core.Application.Exceptions;
+using SwiftBuy.Core.Application.Extensions;
 using SwiftBuy.Core.Domain.Entities.Identity;
 using System;
 using System.Collections.Generic;
@@ -23,14 +26,58 @@ namespace SwiftBuy.Core.Application.Services
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _configuration;
         private readonly IOptions<JwtSettings> _jwtSettings;
+        private readonly IMapper _mapper;
 
-        public AuthService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, IOptions<JwtSettings> jwtSettings)
+        public AuthService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, IOptions<JwtSettings> jwtSettings, IMapper mapper)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
             _jwtSettings = jwtSettings;
+            _mapper = mapper;
         }
+
+        public async Task<UserDto> GetCurrentUserAsync(ClaimsPrincipal claimsPrincipal)
+        {
+            var email = claimsPrincipal.FindFirstValue(ClaimTypes.Email);
+            var user = await _userManager.FindByEmailAsync(email!);
+            return new UserDto()
+            {
+                Id = user!.Id,
+                DisplayName = user.DisplayName,
+                Email = user.Email!,
+                Token = await GenerateTokenAsync(user),
+            };
+        }
+
+        public async Task<AddressDto> GettUserAddressAsync(ClaimsPrincipal claimsPrincipal)
+        {
+            var user = await _userManager.FindUserWithAddress(claimsPrincipal);
+            var address = _mapper.Map<AddressDto>(user!.Address);
+            return address;
+        }
+        
+        public async Task<AddressDto> UpdateUserAddressAsync(ClaimsPrincipal claimsPrincipal, AddressDto addressDto)
+        {
+            var user = await _userManager.FindUserWithAddress(claimsPrincipal);
+            var updatedAddress = _mapper.Map<Address>(user!.Address);
+
+            if (user?.Address is not null)
+                updatedAddress.Id = user.Address.Id;
+
+            user!.Address = updatedAddress;
+            var result = await _userManager.UpdateAsync(user);
+            if (!result.Succeeded)
+                throw new BadRequestException("Problem updating the user");
+
+            return addressDto;
+        }
+
+        public async Task<bool> CheckEmailExists(string email)
+        {
+            return await _userManager.FindByEmailAsync(email) is not null;
+        }
+
         public async Task<UserDto> LoginAsync(LoginDto model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
@@ -58,7 +105,6 @@ namespace SwiftBuy.Core.Application.Services
 
             return response;
         }
-
 
         public async Task<UserDto> RegisterAsync(RegisterDto model)
         {
