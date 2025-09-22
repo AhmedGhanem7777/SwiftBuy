@@ -20,13 +20,13 @@ namespace SwiftBuy.Infrastructure.Basket_Repository
         }
         public async Task<CustomerBasket?> GetBasketAsync(string basketId)
         {
-            var basket = await _database.StringGetAsync(basketId);
+           var basket = await _database.StringGetAsync(basketId);
            return basket.IsNullOrEmpty ? null : JsonSerializer.Deserialize<CustomerBasket>(basket!);
         }
 
         public async Task<CustomerBasket?> UpdateBasketAsync(CustomerBasket basket)
         {
-            var createdOrUpdated = await _database.StringSetAsync(basket.Id, JsonSerializer.Serialize(basket), TimeSpan.FromDays(20));
+           var createdOrUpdated = await _database.StringSetAsync(basket.Id, JsonSerializer.Serialize(basket), TimeSpan.FromDays(20));
            return createdOrUpdated ? await GetBasketAsync(basket.Id) : null;
         }
 

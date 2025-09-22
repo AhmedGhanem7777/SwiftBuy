@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SwiftBuy.Core.Application.Abstraction\SwiftBuy.Core.Application.Abstraction.csproj" />
+    <ProjectReference Include="..\SwiftBuy.Core.Domain\SwiftBuy.Core.Domain.csproj" />
   </ItemGroup>
 
 </Project>

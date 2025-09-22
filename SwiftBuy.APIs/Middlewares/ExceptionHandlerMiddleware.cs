@@ -1,7 +1,7 @@
 ﻿using SwiftBuy.APIs.Controllers.Errors;
-using SwiftBuy.Core.Application.Exceptions;
 using System.Net;
 using System.Text.Json;
+using SwiftBuy.Shared.Exceptions;
 
 namespace SwiftBuy.APIs.Middlewares
 {

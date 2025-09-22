@@ -3,15 +3,12 @@ using SwiftBuy.Core.Application.Abstraction.Models;
 using SwiftBuy.Core.Application.Abstraction.Models.Order;
 using SwiftBuy.Core.Domain.Common.Entities;
 using SwiftBuy.Core.Domain.Entities.Basket;
-using UserAddress = SwiftBuy.Core.Domain.Entities.Identity.Address;
-using OrderAddress = SwiftBuy.Core.Domain.Entities.Order.Address;
-using SwiftBuy.Core.Domain.Entities.Product;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SwiftBuy.Core.Domain.Entities.Order;
+using SwiftBuy.Core.Domain.Entities.Product;
+using CustomerBasketDto = SwiftBuy.Shared.Models.Basket.CustomerBasketDto;
+using BasketItemDto = SwiftBuy.Shared.Models.Basket.BasketItemDto;
+using OrderAddress = SwiftBuy.Core.Domain.Entities.Order.Address;
+using UserAddress = SwiftBuy.Core.Domain.Entities.Identity.Address;
 
 namespace SwiftBuy.Core.Application.Mapping
 {

@@ -21,6 +21,7 @@
     <ProjectReference Include="..\SwiftBuy.Core.Application\SwiftBuy.Core.Application.csproj" />
     <ProjectReference Include="..\SwiftBuy.Infrastructure.Persistence\SwiftBuy.Infrastructure.Persistence.csproj" />
     <ProjectReference Include="..\SwiftBuy.Infrastructure\SwiftBuy.Infrastructure.csproj" />
+    <ProjectReference Include="..\Swiftbuy.Shared\Swiftbuy.Shared.csproj" />
   </ItemGroup>
 
 </Project>
