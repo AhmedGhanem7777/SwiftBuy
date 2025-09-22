@@ -10,6 +10,8 @@ using SwiftBuy.APIs.Middlewares;
 using SwiftBuy.Core.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using SwiftBuy.Infrastructure.Persistence._Identity;
+using SwiftBuy.Shared.Models;
+using System.Configuration;
 namespace SwiftBuy.APIs
 {
     public class Program
@@ -59,6 +61,16 @@ namespace SwiftBuy.APIs
             });
 
             builder.Services.AddIdentityServices(builder.Configuration);
+
+            builder.Services.AddCors(CorsOptions =>
+            {
+                CorsOptions.AddPolicy("SwiftBuyPolicy", policyOptions =>
+                {
+                    policyOptions.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                });
+            });
+
+            builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("StripeSettings"));
             #endregion
 
             var app = builder.Build();
@@ -87,6 +99,8 @@ namespace SwiftBuy.APIs
             app.UseAuthorization();
 
             app.UseStaticFiles();
+
+            app.UseCors("SwiftBuyPolicy");
 
             app.MapControllers();
             #endregion

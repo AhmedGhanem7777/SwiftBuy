@@ -5,6 +5,7 @@ using SwiftBuy.Core.Application.Abstraction.Services.Order;
 using SwiftBuy.Core.Application.Exceptions;
 using SwiftBuy.Core.Domain.Common.Entities;
 using SwiftBuy.Core.Domain.Contracts;
+using SwiftBuy.Core.Domain.Contracts.Infrastructure;
 using SwiftBuy.Core.Domain.Entities.Order;
 using SwiftBuy.Core.Domain.Specifications.Orders;
 using System;
@@ -20,12 +21,14 @@ namespace SwiftBuy.Core.Application.Services
         private readonly IBasketService _basketService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IPaymentService _paymentService;
 
-        public OrderService(IBasketService basketService, IUnitOfWork unitOfWork, IMapper mapper)
+        public OrderService(IBasketService basketService, IUnitOfWork unitOfWork, IMapper mapper, IPaymentService paymentService)
         {
             _basketService = basketService;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _paymentService = paymentService;
         }
         public async Task<OrderToReturnDto> CreateOrderAsync(string buyerEmail, OrderToCreateDto orderDto)
         {
@@ -64,13 +67,24 @@ namespace SwiftBuy.Core.Application.Services
 
             var address = _mapper.Map<Address>(orderDto.ShippingAddress);
             var deliveryMethod = await _unitOfWork.GetRepository<DeliveryMethod, int>().GetByIdAsync(orderDto.DeliveryMethodId);
+
+            var orderRepo = _unitOfWork.GetRepository<Order, int>();
+            var orderSpecs = new OrderWithPaymentIntentSpecification(basket.PaymentIntentId!);
+            var existingOrder = await orderRepo.GetByIdWithSpecAsync(orderSpecs);
+            if (existingOrder is not null)
+            {
+                orderRepo.Delete(existingOrder);
+                await _paymentService.CreateOrUpdatePaymentIntent(basket.Id);
+            }
+
             var order = new Order()
             {
                 BuyerEmail = buyerEmail,
                 ShippingAddress = address,
                 SubTotal = subTotal,
                 Items = orderItems,
-                DeliveryMethod = deliveryMethod
+                DeliveryMethod = deliveryMethod,
+                PaymentIntentId = basket.PaymentIntentId!
             };
             await _unitOfWork.GetRepository<Order, int>().AddAsync(order);
 

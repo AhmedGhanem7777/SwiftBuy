@@ -1,9 +1,4 @@
-﻿using SwiftBuy.Core.Application.Abstraction.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SwiftBuy.Shared.Models.Basket;
 
 namespace SwiftBuy.Core.Application.Abstraction.Services.Basket
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SwiftBuy.APIs.Controllers.Controllers.Base;
 using SwiftBuy.Core.Application.Abstraction;
-using SwiftBuy.Core.Application.Abstraction.Models;
+using SwiftBuy.Shared.Models.Basket;
 using System;
 using System.Collections.Generic;
 using System.Linq;
