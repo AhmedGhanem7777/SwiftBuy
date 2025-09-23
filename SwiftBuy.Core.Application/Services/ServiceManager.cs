@@ -27,8 +27,6 @@ namespace SwiftBuy.Core.Application.Services
             _orderService = new Lazy<IOrderService>(orderServiceFactory);
         }
         public IProductService ProductService => _productService.Value;
-
-
         public IOrderService OrderService => _orderService.Value;
     }
 }

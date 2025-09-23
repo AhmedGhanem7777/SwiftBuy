@@ -1,16 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SwiftBuy.APIs.Controllers.Controllers.Base;
-using SwiftBuy.APIs.Controllers.Errors;
 using SwiftBuy.APIs.Controllers.Filters;
 using SwiftBuy.Core.Application.Abstraction;
 using SwiftBuy.Core.Application.Abstraction.Common;
 using SwiftBuy.Core.Application.Abstraction.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SwiftBuy.APIs.Controllers.Controllers.Products
 {
@@ -41,14 +34,14 @@ namespace SwiftBuy.APIs.Controllers.Controllers.Products
         }
 
         [HttpGet("brands")]
-        public async Task<ActionResult<IEnumerable<BrandDto>>> GetBrands()
+        public async Task<ActionResult<IReadOnlyList<BrandDto>>> GetBrands()
         {
             var brands = await _serviceManager.ProductService.GetBrandsAsync();
             return Ok(brands);
         }
 
         [HttpGet("categories")]
-        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategories()
+        public async Task<ActionResult<IReadOnlyList<CategoryDto>>> GetCategories()
         {
             var categories = await _serviceManager.ProductService.GetCategoriesAsync();
             return Ok(categories);

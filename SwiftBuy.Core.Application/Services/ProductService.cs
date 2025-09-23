@@ -29,7 +29,7 @@ namespace SwiftBuy.Core.Application.Services
         {
             var spec = new ProductWithBrandAndCategorySpecifications(specParams.Sort, specParams.BrandId, specParams.CategoryId, specParams.PageIndex, specParams.PageSize, specParams.Search);
             var products = await _unitOfWork.GetRepository<Product, int>().GetAllWithSpecAsync(spec);
-            var productsToReturnDto = _mapper.Map<IEnumerable<ProductToReturnDto>>(products);
+            var productsToReturnDto = _mapper.Map<IReadOnlyList<ProductToReturnDto>>(products);
 
             var countSpec = new ProductWithFilterationForCountSpecs(specParams.BrandId, specParams.CategoryId, specParams.Search);
             var count = await _unitOfWork.GetRepository<Product, int>().GetCountAsync(countSpec);
@@ -47,16 +47,16 @@ namespace SwiftBuy.Core.Application.Services
             return _mapper.Map<ProductToReturnDto>(product);
         }
 
-        public async Task<IEnumerable<BrandDto>> GetBrandsAsync()
+        public async Task<IReadOnlyList<BrandDto>> GetBrandsAsync()
         {
             var brands = await _unitOfWork.GetRepository<ProductBrand, int>().GetAllAsync();
-            return _mapper.Map<IEnumerable<BrandDto>>(brands);
+            return _mapper.Map<IReadOnlyList<BrandDto>>(brands);
         }
 
-        public async Task<IEnumerable<CategoryDto>> GetCategoriesAsync()
+        public async Task<IReadOnlyList<CategoryDto>> GetCategoriesAsync()
         {
             var categories = await _unitOfWork.GetRepository<ProductCategory, int>().GetAllAsync();
-            return _mapper.Map<IEnumerable<CategoryDto>>(categories);
+            return _mapper.Map<IReadOnlyList<CategoryDto>>(categories);
         }
     }
 }

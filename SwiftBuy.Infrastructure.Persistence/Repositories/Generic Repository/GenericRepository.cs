@@ -23,13 +23,13 @@ namespace SwiftBuy.Infrastructure.Persistence.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync(bool withTracking = false)
+        public async Task<IReadOnlyList<TEntity>> GetAllAsync(bool withTracking = false)
             => withTracking ?
                    await _dbContext.Set<TEntity>().ToListAsync()
                    :
                    await _dbContext.Set<TEntity>().AsNoTracking().ToListAsync();
 
-        public async Task<IEnumerable<TEntity>> GetAllWithSpecAsync(ISpecifications<TEntity, TKey> spec, bool withTracking = false)
+        public async Task<IReadOnlyList<TEntity>> GetAllWithSpecAsync(ISpecifications<TEntity, TKey> spec, bool withTracking = false)
             => withTracking ?
                    await ApplySpecifications(spec).ToListAsync()
                    :
