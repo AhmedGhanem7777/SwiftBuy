@@ -41,6 +41,8 @@ namespace SwiftBuy.Infrastructure.Persistence._Data.Interceptors
                                                  .Where(entity => entity.State is EntityState.Added or EntityState.Modified);
             foreach (var entry in entries)
             {
+                if (string.IsNullOrEmpty(_loggedInUserService.UserId))
+                    _loggedInUserService.UserId = "User";
                 if (entry.State is EntityState.Added)
                 {
                     entry.Entity.CreatedBy = _loggedInUserService.UserId!;
