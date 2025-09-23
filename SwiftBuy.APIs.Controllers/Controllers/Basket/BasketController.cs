@@ -1,13 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SwiftBuy.APIs.Controllers.Controllers.Base;
-using SwiftBuy.Core.Application.Abstraction;
 using SwiftBuy.Core.Application.Abstraction.Services.Basket;
 using SwiftBuy.Shared.Models.Basket;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SwiftBuy.APIs.Controllers.Controllers.Basket
 {

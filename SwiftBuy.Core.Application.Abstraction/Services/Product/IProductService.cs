@@ -13,7 +13,7 @@ namespace SwiftBuy.Core.Application.Abstraction.Services.Product
         Task<Pagination<ProductToReturnDto>> GetPrductsAsync(ProductSpecParams specParams);
         Task<ProductToReturnDto> GetPrductByIdAsync(int id);
 
-        Task<IEnumerable<BrandDto>> GetBrandsAsync();
-        Task<IEnumerable<CategoryDto>> GetCategoriesAsync();
+        Task<IReadOnlyList<BrandDto>> GetBrandsAsync();
+        Task<IReadOnlyList<CategoryDto>> GetCategoriesAsync();
     }
 }
