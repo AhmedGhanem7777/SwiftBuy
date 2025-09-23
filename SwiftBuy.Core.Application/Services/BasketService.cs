@@ -1,13 +1,8 @@
 ﻿using AutoMapper;
-using SwiftBuy.Core.Application.Abstraction.Models;
 using SwiftBuy.Core.Application.Abstraction.Services.Basket;
-using SwiftBuy.Core.Domain.Contracts.Infrastructure;
+using SwiftBuy.Shared.Models.Basket;
 using SwiftBuy.Core.Domain.Entities.Basket;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SwiftBuy.Core.Application.Abstraction.Common.Contracts.Infrastructure;
 
 namespace SwiftBuy.Core.Application.Services
 {

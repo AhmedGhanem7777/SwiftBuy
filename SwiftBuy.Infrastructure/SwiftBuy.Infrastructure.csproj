@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
     <PackageReference Include="StackExchange.Redis" Version="2.9.11" />
+    <PackageReference Include="Stripe.net" Version="48.5.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SwiftBuy.Core.Application.Abstraction\SwiftBuy.Core.Application.Abstraction.csproj" />
     <ProjectReference Include="..\SwiftBuy.Core.Domain\SwiftBuy.Core.Domain.csproj" />
   </ItemGroup>
 

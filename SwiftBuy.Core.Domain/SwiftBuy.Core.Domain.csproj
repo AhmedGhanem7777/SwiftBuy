@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SwiftBuy.Core.Shared\SwiftBuy.Core.Shared.csproj" />
+    <ProjectReference Include="..\Swiftbuy.Shared\Swiftbuy.Shared.csproj" />
   </ItemGroup>
 
 </Project>

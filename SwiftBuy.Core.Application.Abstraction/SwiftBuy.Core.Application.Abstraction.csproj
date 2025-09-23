@@ -10,4 +10,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.20" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SwiftBuy.Core.Domain\SwiftBuy.Core.Domain.csproj" />
+    <ProjectReference Include="..\Swiftbuy.Shared\Swiftbuy.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
