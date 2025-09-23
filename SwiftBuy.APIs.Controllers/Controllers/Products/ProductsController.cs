@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SwiftBuy.APIs.Controllers.Controllers.Base;
 using SwiftBuy.APIs.Controllers.Errors;
+using SwiftBuy.APIs.Controllers.Filters;
 using SwiftBuy.Core.Application.Abstraction;
 using SwiftBuy.Core.Application.Abstraction.Common;
 using SwiftBuy.Core.Application.Abstraction.Models;
@@ -22,6 +23,7 @@ namespace SwiftBuy.APIs.Controllers.Controllers.Products
             _serviceManager = serviceManager;
         }
 
+        [Cached(600)]
         [HttpGet]
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery]ProductSpecParams specParams)
         {

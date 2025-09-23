@@ -1,5 +1,5 @@
 ﻿using StackExchange.Redis;
-using SwiftBuy.Core.Domain.Contracts.Infrastructure;
+using SwiftBuy.Core.Application.Abstraction.Common.Contracts.Infrastructure;
 using SwiftBuy.Core.Domain.Entities.Basket;
 using System;
 using System.Collections.Generic;

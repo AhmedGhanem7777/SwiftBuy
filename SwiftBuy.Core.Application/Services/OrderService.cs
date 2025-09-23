@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
+using SwiftBuy.Core.Application.Abstraction.Common.Contracts.Infrastructure;
 using SwiftBuy.Core.Application.Abstraction.Models.Order;
 using SwiftBuy.Core.Application.Abstraction.Services.Basket;
 using SwiftBuy.Core.Application.Abstraction.Services.Order;
 using SwiftBuy.Core.Application.Exceptions;
 using SwiftBuy.Core.Domain.Common.Entities;
 using SwiftBuy.Core.Domain.Contracts;
-using SwiftBuy.Core.Domain.Contracts.Infrastructure;
 using SwiftBuy.Core.Domain.Entities.Order;
 using SwiftBuy.Core.Domain.Specifications.Orders;
 using System;
