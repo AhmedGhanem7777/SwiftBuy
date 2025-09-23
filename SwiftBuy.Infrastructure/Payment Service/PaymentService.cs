@@ -1,7 +1,6 @@
 ﻿using Stripe;
 using Product = SwiftBuy.Core.Domain.Common.Entities.Product;
 using SwiftBuy.Core.Domain.Contracts;
-using SwiftBuy.Core.Domain.Contracts.Infrastructure;
 using SwiftBuy.Core.Domain.Entities.Order;
 using SwiftBuy.Shared.Exceptions;
 using SwiftBuy.Shared.Models.Basket;
@@ -17,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Stripe.V2;
 using Microsoft.Extensions.Logging;
 using SwiftBuy.Core.Domain.Specifications.Orders;
+using SwiftBuy.Core.Application.Abstraction.Common.Contracts.Infrastructure;
 
 namespace SwiftBuy.Infrastructure.Payment_Service
 {
@@ -90,17 +90,17 @@ namespace SwiftBuy.Infrastructure.Payment_Service
             switch (stripeEvent.Type)
             {
                 case "payment_intent.succeeded":
-                    order = await UpdatePaymentIntent(paymentIntent.Id, true);
+                    order = await UpdateOrder(paymentIntent.Id, true);
                     _logger.LogInformation("Payment Succeeded: {id}", paymentIntent.Id);
                     break;
                 case "payment_intent.payment_failed":
-                    order = await UpdatePaymentIntent(paymentIntent.Id, false);
+                    order = await UpdateOrder(paymentIntent.Id, false);
                     _logger.LogInformation("Payment Failed: {id}", paymentIntent.Id);
                     break;
             }
         }
 
-        private async Task<Order?> UpdatePaymentIntent(string paymentIntentId, bool isPaid)
+        private async Task<Order?> UpdateOrder(string paymentIntentId, bool isPaid)
         {
             var orderRepo = _unitOfWork.GetRepository<Order, int>();
             var spec = new OrderWithPaymentIntentSpecification(paymentIntentId);

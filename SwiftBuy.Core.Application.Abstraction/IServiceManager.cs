@@ -12,7 +12,6 @@ namespace SwiftBuy.Core.Application.Abstraction
     public interface IServiceManager
     {
         public IProductService ProductService { get;}
-        public IBasketService BasketService { get;}
         public IOrderService OrderService { get;}
     }
 }

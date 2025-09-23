@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SwiftBuy.APIs.Controllers.Controllers.Base;
 using SwiftBuy.Core.Application.Abstraction;
+using SwiftBuy.Core.Application.Abstraction.Services.Basket;
 using SwiftBuy.Shared.Models.Basket;
 using System;
 using System.Collections.Generic;
@@ -12,17 +13,17 @@ namespace SwiftBuy.APIs.Controllers.Controllers.Basket
 {
     public class BasketController : BaseApiController
     {
-        private readonly IServiceManager _serviceManager;
+        private readonly IBasketService _basketService;
 
-        public BasketController(IServiceManager serviceManager)
+        public BasketController(IBasketService basketService)
         {
-            _serviceManager = serviceManager;
+            _basketService = basketService;
         }
 
         [HttpGet]
         public async Task<ActionResult<CustomerBasketDto>> GetBasketById(string id)
         {
-            var basket = await _serviceManager.BasketService.GetCustomerBaskeAsync(id);
+            var basket = await _basketService.GetCustomerBaskeAsync(id);
             if (basket is null)
                 return NotFound();
             return Ok(basket);
@@ -31,14 +32,14 @@ namespace SwiftBuy.APIs.Controllers.Controllers.Basket
         [HttpPost]
         public async Task<ActionResult<CustomerBasketDto>> UpdateBasket(CustomerBasketDto customerBasketDto)
         {
-            var updatedBasket = await _serviceManager.BasketService.UpdateCustomerBasketAsync(customerBasketDto);
+            var updatedBasket = await _basketService.UpdateCustomerBasketAsync(customerBasketDto);
             return Ok(updatedBasket);
         }
 
         [HttpDelete]
         public async Task DeleteBasketById(string id)
         {
-            await _serviceManager.BasketService.DeleteCustomerBasketAsync(id);
+            await _basketService.DeleteCustomerBasketAsync(id);
         }
     }
 }
