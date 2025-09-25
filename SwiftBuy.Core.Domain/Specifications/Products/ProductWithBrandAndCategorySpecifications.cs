@@ -53,5 +53,11 @@ namespace SwiftBuy.Core.Domain.Specifications.Products
             Includes.Add(p => p.Brand!);
             Includes.Add(p => p.Category!);
         }
+
+        public ProductWithBrandAndCategorySpecifications()
+        {
+            Includes.Add(p => p.Brand!);
+            Includes.Add(p => p.Category!);
+        }
     }
 }

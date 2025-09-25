@@ -18,17 +18,26 @@ namespace SwiftBuy.AdminDashboard.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var users = await _userManager.Users.Select( u => new UserViewModel
-            {
-                Id = u.Id,
-                UserName = u.UserName!,
-                DisplayName = u.DisplayName,
-                Email = u.Email!,
-                PhoneNumber = u.PhoneNumber!,
-                Roles = _userManager.GetRolesAsync(u).Result
-            }).ToListAsync();
+            var users = await _userManager.Users.ToListAsync();
 
-            return View(users);
+            var userVMs = new List<UserViewModel>();
+
+            foreach (var user in users)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+
+                userVMs.Add(new UserViewModel
+                {
+                    Id = user.Id,
+                    UserName = user.UserName!,
+                    DisplayName = user.DisplayName,
+                    Email = user.Email!,
+                    PhoneNumber = user.PhoneNumber!,
+                    Roles = roles
+                });
+            }
+
+            return View(userVMs);
         }
 
         public async Task<IActionResult> Edit(string id)

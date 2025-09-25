@@ -24,10 +24,13 @@
                             <li><a class="dropdown-item" href="#!">Settings</a></li>
                             <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                             <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="#!">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
+            </form>
+
+            <form asp-controller="Admin" asp-action="Logout" class="dropdown-item">
+                <button type="submit" class="btn btn-link p-0 text-dark">Logout</button>
             </form>
         </nav>
     </header>
@@ -44,6 +47,14 @@
                         </a><a class="nav-link" asp-controller="User" asp-action="Index">
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Users
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Website</div>
+                        <a class="nav-link" asp-controller="Product" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            Products
+                        </a><a class="nav-link" asp-controller="Brand" asp-action="Index">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            Product Brands
                         </a>
                     </div>
                 </div>
