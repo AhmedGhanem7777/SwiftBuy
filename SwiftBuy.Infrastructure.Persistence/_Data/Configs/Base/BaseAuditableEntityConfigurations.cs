@@ -18,13 +18,13 @@ namespace SwiftBuy.Infrastructure.Persistence._Data.Configs.Base
             base.Configure(builder);
 
             builder.Property(E => E.CreatedBy)
-                .IsRequired();
+                /*.IsRequired()*/;
             builder.Property(E => E.CreatedOn)
-                .IsRequired();
+                /*.IsRequired()*/;
             builder.Property(E => E.LastModifiedBy)
-                .IsRequired();
+                /*.IsRequired()*/;
             builder.Property(E => E.LastModifiedOn)
-                .IsRequired();
+                /*.IsRequired()*/;
         }
     }
 }

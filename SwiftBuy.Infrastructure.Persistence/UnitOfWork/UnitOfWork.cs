@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SwiftBuy.Infrastructure.Persistence.UnitOfWork
 {
-    internal class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly SwiftBuyContext _dbContext;
         private readonly ConcurrentDictionary<string, object> _repositories;

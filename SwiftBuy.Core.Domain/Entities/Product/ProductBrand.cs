@@ -9,7 +9,7 @@ namespace SwiftBuy.Core.Domain.Entities.Product
 {
     public class ProductBrand : BaseAuditableEntity<int>
     {
-        public required string Name { get; set; }
+        public /*required*/ string Name { get; set; }
         public string? PictureUrl { get; set; }
     }
 }
