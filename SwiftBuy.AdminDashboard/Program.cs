@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SwiftBuy.AdminDashboard.Helper;
+using SwiftBuy.Core.Domain.Contracts;
 using SwiftBuy.Core.Domain.Entities.Identity;
 using SwiftBuy.Infrastructure.Persistence._Data;
 using SwiftBuy.Infrastructure.Persistence._Identity;
+using SwiftBuy.Infrastructure.Persistence.UnitOfWork;
 
 namespace SwiftBuy.AdminDashboard
 {
@@ -55,6 +58,12 @@ namespace SwiftBuy.AdminDashboard
                 //identityOptions.Lockout.MaxFailedAccessAttempts = 10;
                 //identityOptions.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
             });
+
+            // Auto Mapper Configurations
+            builder.Services.AddAutoMapper(typeof(Mapping));
+
+            // Unit of Work
+            builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             #endregion
 
             var app = builder.Build();
@@ -76,7 +85,7 @@ namespace SwiftBuy.AdminDashboard
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}"); 
+                pattern: "{controller=Admin}/{action=Login}/{id?}"); 
             #endregion
 
             app.Run();
